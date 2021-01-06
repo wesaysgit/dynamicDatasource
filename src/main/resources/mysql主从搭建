@@ -1,0 +1,19 @@
+
+
+-- master my.cnf
+server-id=1
+log-bin=master-bin
+log-bin-index=master-bin.index
+
+-- slave my.cnf
+server-id=2
+relay-log-index=slave-relay-bin.index
+relay-log=slave-relay-bin
+
+-- 创建用户并授权
+create user 'wesays'@'192.168.17.130' identified by 'root';
+grant all privileges on *.* to 'wesays'@'192.168.17.130' with grant option;
+flush privileges;
+
+-- 指定主库
+change master to master_host='192.168.17.129',master_port=3306,master_user='wesays',master_password='root',master_log_file='master-bin.000001',master_log_pos=0;

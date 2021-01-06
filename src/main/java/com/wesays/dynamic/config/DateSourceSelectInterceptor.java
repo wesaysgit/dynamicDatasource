@@ -59,8 +59,8 @@ public class DateSourceSelectInterceptor implements Interceptor {
                 }
             }
         } else {
-            //一般使用事务的都是写操作，直接使用主库
-            lookupKey = DynamicDataSourceHolder.DB_MASTER;
+            //一般使用事务的都是查询操作，直接使用从库
+            lookupKey = DynamicDataSourceHolder.DB_SLAVE;
         }
 
         //设置数据源

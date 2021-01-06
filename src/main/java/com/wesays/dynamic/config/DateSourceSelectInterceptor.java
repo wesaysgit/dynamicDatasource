@@ -53,14 +53,14 @@ public class DateSourceSelectInterceptor implements Interceptor {
                     if (sql.matches(REGEX)) {
                         lookupKey = DynamicDataSourceHolder.DB_MASTER;
                     } else {
-                        //使用从库
+                        //查詢操作，使用从库
                         lookupKey = DynamicDataSourceHolder.DB_SLAVE;
                     }
                 }
             }
         } else {
-            //一般使用事务的都是查询操作，直接使用从库
-            lookupKey = DynamicDataSourceHolder.DB_SLAVE;
+            //使用事务的，使用主库
+            lookupKey = DynamicDataSourceHolder.DB_MASTER;
         }
 
         //设置数据源
